@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <h1>Juniors Progress Tracker</h1>
+<head>
+  <meta charset="UTF-8" />
+  <title>Toddler Letter Tracker</title>
+  <style>
+    h1{
+        text-align: center;
+        border: 5px solid blue;
+        border-radius: 20px;
+        background-color: #007bff;
+        color: white;
+        font-style: italic;
+    }
+    body {
+      padding: 1rem;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    #tracker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      background-color: ;
+    }
+    .card {
+      flex: 1 1 120px; /* grow, shrink, basis */
+      max-width: 120px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .bar-bg {
+      height: 10px;
+      background-color: #eee;
+      border-radius: 5px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background-color: #4caf50;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    button {
+      margin-top: 8px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="tracker"></div>
+
+  <script>
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+    const progressData = {};
+
+    const container = document.getElementById("tracker");
+
+    alphabet.forEach(letter => {
+      progressData[letter] = 0;
+
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const title = document.createElement("div");
+      title.style.fontSize = "1.25rem";
+      title.style.fontWeight = "bold";
+      title.textContent = letter;
+
+      const barBg = document.createElement("div");
+      barBg.className = "bar-bg";
+
+      const barFill = document.createElement("div");
+      barFill.className = "bar-fill";
+      barBg.appendChild(barFill);
+
+      const percent = document.createElement("div");
+      percent.style.fontSize = "0.9rem";
+      percent.textContent = "0%";
+
+      const button = document.createElement("button");
+      button.textContent = "Learned More";
+      button.onclick = () => {
+        progressData[letter] = Math.min(progressData[letter] + 10, 100);
+        barFill.style.width = progressData[letter] + "%";
+        percent.textContent = progressData[letter] + "%";
+      };
+
+      card.append(title, barBg, percent, button);
+      container.appendChild(card);
+    });
+  </script>
+  
+
+</body>
+</html>
